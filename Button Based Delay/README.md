@@ -1,12 +1,5 @@
 # Button Based Delay
-Now that you have begun to familiarize yourself with the TIMER modules, why don't we make an interesting change to our code from the last lab.
+This code programs teh board to be able to blink an led at a rate set by how long you press down the button. If the button is pressed for once second, the LED will turn on for 1 second, then turn on for 2 second, and repeat.
 
-## Task
-Setup your microcontroller to initially blink and LED at a rate of 10Hz upon restarting or powering up. Then utilizing one of the buttons on board, a user should be able to set the delay or blinking rate of the LED by holding down a button. The duration in which the button is depressed should then become the new rate at which the LED blinks. As previously stated, you most likely will want to take advantage of the fact that TIMER modules exist and see if you can let them do a bulk of the work for you.
+This is done using a timer, capture compare registers, global interrupts, an LED and a button. The interrupt is set to detect the falling edge of the button press at the input pin. Then the interrupt detects the rising edge of the button when the button is released. The timer is then reset and set into continuous mode after the first interrupt triggers and counts up to register how long the button is pressed for. This value is then saved to a capture compare register and set as the value the timer now counts up to in continuous mode. The interrupt flag is then also reset. 
 
-### Extra Work
-## Reset Button
-What is a piece of electronics without a reset button? Instead of relying on resetting your processor using the built in reset circuitry, why not instead use another button to reset the rate back to 10Hz.
-
-## Button Based Hertz
-Most likely using two buttons, what if instead of making a delay loop based on the time, the user could instead enter a mode where the number of times they pressed the button would become the number in Hz of the blinking rate? How do you think you would implement that with just one button?
